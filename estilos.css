@@ -99,12 +99,22 @@ ul {
    ========================================================= */
 
 .header {
-    background-color: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
-    position: sticky;
-    top: 0;
+    background-color: transparent; /* Antes #ffffff */
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: fixed; /* Fixed para que flote sobre el hero */
+    top: 46px; /* BAJAMOS la navbar para no tapar la barra superior */
     left: 0;
+    width: 100%;
     z-index: 999;
+    transition: background-color 0.4s ease, top 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Clase que se agrega con JS al hacer scroll */
+.header.header-scroll {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-bottom: none;
+    top: 0; /* Al bajar, se pega al techo */
 }
 
 .fila-nav {
@@ -227,7 +237,7 @@ ul {
 .btn {
     display: inline-block;
     padding: 12px 30px;
-    border-radius: 999px;
+    border-radius: 5px; /* RECTANGULAR (antes 999px) */
     font-size: 0.95rem;
     font-weight: 500;
     border: 2px solid transparent;
@@ -236,26 +246,29 @@ ul {
     text-align: center;
 }
 
+/* EXPLORE NOW: Blanco fondo, texto oscuro */
 .btn-blanco {
     background-color: #fff;
-    color: #c6857d;
+    color: #212529; /* Texto oscuro */
 }
 
 .btn-blanco:hover {
-    background-color: transparent;
-    color: #fff;
-    border-color: #fff;
+    background-color: #c6857d; /* Al hover, fondo rosa */
+    color: #fff;               /* Texto blanco */
+    border-color: #c6857d;
 }
 
+/* BOOK NOW: Transparente fondo, borde blanco, texto blanco */
 .btn-rosa {
-    background-color: #c6857d;
+    background-color: transparent;
     color: #fff;
-    border-color: #c6857d;
+    border: 2px solid #fff;
 }
 
 .btn-rosa:hover {
     background-color: #fff;
     color: #c6857d;
+    border-color: #fff;
 }
 
 /* =========================================================
@@ -1407,3 +1420,93 @@ ul {
     box-shadow: 0 10px 25px rgba(15, 23, 42, 0.3);
 }
 
+
+/* =========================================================
+   ANIMACIONES EXACTAS DEL TEMPLATE BASIT
+   ========================================================= */
+
+/* Estado inicial oculto */
+.animado {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+/* Estado visible cuando aparece en viewport */
+.animado.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* HERO animaciones específicas */
+.hero h1 {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity .9s ease, transform .9s ease;
+}
+
+.hero.visible h1 {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.hero-descripcion {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity .9s ease .15s, transform .9s ease .15s;
+}
+
+.hero.visible .hero-descripcion {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.hero-botones {
+    opacity: 0;
+    transition: opacity .9s ease .3s;
+}
+
+.hero.visible .hero-botones {
+    opacity: 1;
+}
+
+/* Tarjetas con aparición suave */
+.tarjeta-servicio,
+.card-blog,
+.card-especialista {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .9s ease, transform .9s ease;
+}
+
+.tarjeta-servicio.visible,
+.card-blog.visible,
+.card-especialista.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Para blog y specialists: pequeño delay */
+.card-blog.visible {
+    transition-delay: .12s;
+}
+.card-especialista.visible {
+    transition-delay: .2s;
+}
+
+/* Menú móvil deslizante EXACTO */
+.nav-activo {
+    display: block !important;
+    animation: slideDown .35s ease forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

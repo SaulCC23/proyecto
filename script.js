@@ -24,13 +24,24 @@ if (btnSubir) {
   });
 }
 
-// ========================================================
-//  MENÚ MÓVIL (HAMBURGUESA)
-//  Requisito: navegación responsive
-// ========================================================
+/* ============================================================
+   NAVBAR CHANGE ON SCROLL
+   ============================================================ */
+const header = document.querySelector('.header');
 
-const btnMenu = document.getElementById('btnMenu');
-const navPrincipal = document.querySelector('.nav-principal');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    header.classList.add('header-scroll');
+  } else {
+    header.classList.remove('header-scroll');
+  }
+});
+
+/* ============================================================
+   MENÚ MÓVIL (con animación slideDown del CSS)
+   ============================================================ */
+const btnMenu = document.getElementById("btnMenu");
+const navPrincipal = document.querySelector(".nav-principal");
 
 if (btnMenu && navPrincipal) {
   btnMenu.addEventListener('click', () => {
@@ -298,6 +309,141 @@ if (btnPlay && window.Fancybox) {
     ]);
   });
 }
+
+// ========================================================
+//  VALIDACIÓN FORMULARIO CITA (REQ 16)
+//  Requisito: validación de campos vacíos en el formulario de cita
+// ========================================================
+
+const btnCita = document.getElementById('btnCita');
+
+if (btnCita) {
+  btnCita.addEventListener('click', (e) => {
+    e.preventDefault(); // Evita el submit real (si fuera un form) o recarga
+
+    const nombre = document.getElementById('citaNombre').value.trim();
+    const correo = document.getElementById('citaCorreo').value.trim();
+    const telefono = document.getElementById('citaTelefono').value.trim();
+    const fecha = document.getElementById('citaFecha').value.trim();
+    const categoria = document.getElementById('citaCategoria').value;
+
+    if (nombre === '' || correo === '' || telefono === '' || fecha === '' || categoria === '') {
+      alert('Por favor completa todos los campos para agendar tu cita.');
+    } else {
+      // Aquí iría la lógica backend (AJAX/Fetch)
+      alert('¡Cita solicitada con éxito!\nNos pondremos en contacto contigo.');
+      // Opcional: limpiar campos
+      document.getElementById('citaNombre').value = '';
+      document.getElementById('citaCorreo').value = '';
+      document.getElementById('citaTelefono').value = '';
+      document.getElementById('citaFecha').value = '';
+      document.getElementById('citaCategoria').value = '';
+    }
+  });
+}
+
+// ========================================================
+//  VALIDACIÓN FORMULARIO CONTACTO (REQ 16)
+//  Requisito: validación de contacto
+// ========================================================
+
+const formConsult = document.getElementById('formConsult');
+
+if (formConsult) {
+  formConsult.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nombre = document.getElementById('consultName').value.trim();
+    const email = document.getElementById('consultEmail').value.trim();
+    const asunto = document.getElementById('consultSubject').value.trim();
+    const mensaje = document.getElementById('consultMessage').value.trim();
+
+    if (nombre === '' || email === '' || asunto === '' || mensaje === '') {
+      alert('Por favor rellena todos los datos de contacto.');
+    } else {
+      alert('Mensaje enviado. ¡Gracias por contactarnos!');
+      formConsult.reset();
+    }
+  });
+}
+
+// ========================================================
+//  VALIDACIÓN NEWSLETTER
+// ========================================================
+
+const formNews = document.getElementById('formNews');
+
+if (formNews) {
+  formNews.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('newsEmail').value.trim();
+
+    if (email === '') {
+      alert('Escribe tu correo para suscribirte.');
+    } else {
+      alert('¡Gracias por suscribirte a nuestro newsletter!');
+      formNews.reset();
+    }
+  });
+}
+
+// ========================================================
+//  MODAL OFERTA ESPECIAL (REQ 23)
+//  Requisito: ventana modal con información/oferta
+// ========================================================
+
+const btnAbrirModal = document.getElementById('btnAbrirModal');
+
+if (btnAbrirModal && window.Fancybox) {
+  btnAbrirModal.addEventListener('click', () => {
+    Fancybox.show([
+      {
+        src: `
+          <div style="padding:40px; text-align:center; max-width:500px;">
+            <h2 style="color:#c6857d; margin-bottom:20px;">SPECIAL OFFER!</h2>
+            <p style="font-size:1.1rem; color:#444;">
+              Get <strong>50% OFF</strong> on your first Hair Treatment this week.
+            </p>
+            <p style="margin-top:20px; color:#666;">
+              Use code: <strong>BASIT50</strong>
+            </p>
+          </div>
+        `,
+        type: 'html'
+      }
+    ]);
+  });
+}
+
+
+/* ============================================================
+   ANIMACIONES EXACTAS: Scroll Reveal + Hero Reveal
+   ============================================================ */
+
+const observador = new IntersectionObserver(
+  (entradas) => {
+    entradas.forEach((entrada) => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add("visible");
+      }
+    });
+  },
+  {
+    threshold: 0.25
+  }
+);
+
+// Aplicar animado a TODAS las secciones
+document.querySelectorAll(".animado").forEach((el) => observador.observe(el));
+
+// HERO animación especial
+const hero = document.querySelector(".hero");
+if (hero) observador.observe(hero);
+
+// Tarjetas individuales (services, blog, specialists)
+document.querySelectorAll(".tarjeta-servicio").forEach((el) => observador.observe(el));
+document.querySelectorAll(".card-blog").forEach((el) => observador.observe(el));
+document.querySelectorAll(".card-especialista").forEach((el) => observador.observe(el));
 
 
 
