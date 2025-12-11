@@ -38,6 +38,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden; /* Asegurar que no haya scroll horizontal en raíz */
 }
 
 body {
@@ -45,6 +46,7 @@ body {
     color: #212529;
     background-color: #ffffff;
     line-height: 1.6;
+    overflow-x: hidden; /* Evitar scroll horizontal por animaciones */
 }
 
 img {
@@ -138,6 +140,12 @@ ul {
 .nav-principal a {
     position: relative;
     font-weight: 500;
+    color: #ffffff; /* Texto blanco por defecto (sobre fondo transparente) */
+    transition: color 0.3s ease;
+}
+
+/* Cuando el header se pone blanco (scroll), el texto cambia a oscuro */
+.header-scroll .nav-principal a {
     color: #111827;
 }
 
@@ -271,6 +279,18 @@ ul {
     border-color: #fff;
 }
 
+/* Btn marron solido (para fondos claros como Portfolio) */
+.btn-brown {
+    background-color: #c6857d;
+    color: #fff;
+    border: 2px solid #c6857d;
+}
+
+.btn-brown:hover {
+    background-color: #b06b63;
+    border-color: #b06b63;
+}
+
 /* =========================================================
    BARRA DE CITA (FORMULARIO)
    Requisito: formulario de reservación
@@ -362,7 +382,12 @@ ul {
 
 .icono-separador img {
     width: 24px;
-    margin: 0 auto 16px auto;
+    margin: 0 auto 16px auto; /* Por defecto centrado (usado en títulos centrados) */
+}
+
+/* Excepción: En la sección Working Time (columna-about) queremos alineación izquierda */
+.columna-about .icono-separador img {
+    margin: 0 0 16px 0; /* Alinear a la izquierda */
 }
 
 .texto-intro {
@@ -677,30 +702,122 @@ ul {
 /* Botones para filtrar (Requisito: interacción con DOM) */
 .btn-filtro {
     font-size: 0.85rem;
-    padding: 8px 20px;
-    border-radius: 999px;
-    border: 1px solid #e5e7eb;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border-radius: 4px; /* RECTANGULAR, esquinas ligeramente redondeadas */
+    border: none;
     cursor: pointer;
-    background-color: #f9fafb;
+    background-color: #f3f3f3; /* Inactivo: Gris claro */
+    color: #111827;
+    margin: 0 4px;
+    transition: all 0.3s ease;
 }
 
 .btn-filtro.activo,
 .btn-filtro:hover {
-    background-color: #c6857d;
-    border-color: #c6857d;
+    background-color: #c6857d; /* Activo: Marrón/Rosa */
     color: #fff;
+    box-shadow: 0 4px 12px rgba(198, 133, 125, 0.4);
 }
 
 .grid-portfolio {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 30px; /* Separación marcada como en la foto referencial */
+    margin-bottom: 40px;
+}
+
+.item-portfolio {
+    display: block;
+    position: relative; /* Necesario para posicionar el overlay */
+    overflow: hidden;   /* Para que no se salga nada */
 }
 
 .item-portfolio img {
-    height: 260px;
+    width: 100%;
+    height: 320px; /* Altura fija para uniformidad */
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 0; /* Imagen cuadrada/rectangular sin bordes */
+    display: block;
+    transition: transform 0.3s ease, filter 0.3s ease; /* Transición suave para filtro también */
+}
+
+.item-portfolio:hover img {
+    transform: scale(1.02);
+    filter: grayscale(100%); /* Efecto blanco y negro al pasar el mouse */
+}
+
+/* OVERLAY COMPLEJO: Título arriba, Iconos abajo */
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; /* El filtro gris lo da la imagen */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    /* Quitamos flex center para usar posicionamiento absoluto interno */
+    display: block; 
+}
+
+.item-portfolio:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+/* CAJA DE INFORMACIÓN (TÍTULO): Arriba Derecha */
+.overlay-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #fff;
+    padding: 15px 25px;
+    text-align: right;
+    min-width: 140px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.overlay-info h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.overlay-info span {
+    font-size: 0.85rem;
+    color: #c6857d; /* Color rosado/marrón para subtítulo */
+    display: block;
+    margin-top: 4px;
+}
+
+/* ICONOS: Abajo Izquierda (Vertical u Horizontal según foto, parece vertical stack o bloque) */
+.overlay-icons {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column; /* Apilados verticalmente como en la referencia */
+    gap: 8px;
+}
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    background-color: #888; /* Fondo gris oscuro por defecto */
+    border-radius: 4px; /* Cuadrado con bordes suaves */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.icon-box:hover {
+    background-color: #c6857d; /* Cambio a color brand al hover */
 }
 
 .margen-top {
@@ -716,7 +833,7 @@ ul {
    en la propia sección, usando la imagen de maquillaje. */
 .seccion-cta {
     position: relative;
-    padding: 80px 0;
+    padding: 140px 0; /* Aumentado de 80px para mayor altura */
     color: #fff;
     text-align: center;
     background-image: url('imagenes/imgi_33_4.jpg');
@@ -731,14 +848,40 @@ ul {
     display: none;
 }
 
+/* OVERLAY OSCURO para el parallax */
+.cta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Filtro oscuro al 60% */
+    z-index: 0; /* Detrás del contenido */
+}
+
 .cta-contenido {
     position: relative;
-    z-index: 1;
+    z-index: 1; /* Delante del overlay */
 }
 
 .cta-contenido h2 {
     font-size: 2rem;
     margin-bottom: 16px;
+}
+
+/* Botón específico del CTA */
+.seccion-cta .btn-blanco {
+    transition: all 0.3s ease;
+    border: 2px solid transparent; /* Para evitar saltos al poner borde en hover */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Espacio para el icono */
+}
+
+.seccion-cta .btn-blanco:hover {
+    background-color: transparent;
+    color: #ffffff;
+    border-color: #ffffff;
 }
 
 /* =========================================================
@@ -1404,7 +1547,7 @@ ul {
 
 .btn-subir {
     position: fixed;
-    right: 26px;
+    right: 26px; /* Posición final */
     bottom: 26px;
     width: 42px;
     height: 42px;
@@ -1414,10 +1557,24 @@ ul {
     color: #fff;
     font-size: 1rem;
     cursor: pointer;
-    display: none;      /* se muestra con JS al hacer scroll */
+    
+    /* ANIMACIÓN: Inicio fuera de pantalla (izquierdo) 
+       Restauramos desplazamiento lateral pero SIN REBOTE (ease-out) */
+    opacity: 0;
+    transform: translateX(-100vw); /* Viene desde TODA la izquierda */
+    transition: transform 1s ease-out, opacity 1s ease-out;
+    
+    display: flex; /* Siempre flex, controlamos visibilidad con opacity/transform */
     align-items: center;
     justify-content: center;
     box-shadow: 0 10px 25px rgba(15, 23, 42, 0.3);
+    z-index: 1000;
+}
+
+/* Clase activa para mostrar el botón */
+.btn-subir.mostrar {
+    opacity: 1;
+    transform: translateX(0); /* Se detiene EXACTAMENTE en su sitio (right: 26px) */
 }
 
 

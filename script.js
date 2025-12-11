@@ -6,12 +6,12 @@
 const btnSubir = document.getElementById('btnSubir');
 
 if (btnSubir) {
-  // Mostrar u ocultar el botón según la posición del scroll
+  // Mostrar u ocultar el botón con clase (ANIMACION)
   window.addEventListener('scroll', () => {
     if (window.scrollY > 400) {
-      btnSubir.style.display = 'flex';
+      btnSubir.classList.add('mostrar');
     } else {
-      btnSubir.style.display = 'none';
+      btnSubir.classList.remove('mostrar');
     }
   });
 

@@ -32,8 +32,20 @@
     }
 
     /* HEADER + MENÚ MÓVIL (REQ 2) */
+    .header {
+        position: relative; /* Ya no fixed para evitar líos con barra top */
+        top: 0;
+        background-color: #c6857d; /* Fondo marrón como en la foto */
+        box-shadow: none;
+        border-bottom: none;
+    }
+
     .fila-nav {
         padding: 10px 16px;
+        /* Asegurar flex para que logo y hamburguesa queden en extremos */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .nav-principal ul {
@@ -59,11 +71,13 @@
     .nav-principal a {
         display: block;
         padding: 10px 16px;
+        color: #111827; /* Enlaces en el menú desplegable: oscuros */
     }
 
     .btn-menu {
         display: block;          /* se muestra icono de hamburguesa (REQ 2) */
-        color: #111827;
+        color: #ffffff;          /* Icono Blanco sobre fondo marrón */
+        font-size: 1.5rem;
     }
 
     /* HERO */
@@ -114,18 +128,28 @@
     }
 
     /* PORTFOLIO: 2 por fila */
+    /* PORTFOLIO: 2 por fila, pero con gap ajustado */
     .grid-portfolio {
         grid-template-columns: repeat(2, 1fr);
+        gap: 12px; /* Menor espacio en móvil */
     }
 
     .item-portfolio img {
-        height: 180px;
+        height: 200px; /* Un poco más de altura para que se vean bien */
     }
 
-    /* CTA PARALLAX: un poco más pequeña en alto */
+    /* CTA PARALLAX: Ajuste para móvil
+       - Altura automática con padding (ya no fixed height)
+       - Background scroll (sin parallax para rendimiento/compatibilidad)
+    */
     .seccion-cta {
-        height: 220px;
-        background-attachment: scroll; /* en mobile se desactiva el fixed por rendimiento */
+        height: auto;
+        padding: 60px 0;
+        background-attachment: scroll; 
+    }
+    
+    .seccion-cta h2 {
+        font-size: 1.5rem; /* Título un poco más pequeño */
     }
 
     /* SPECIALIST: 2 cards por fila */
