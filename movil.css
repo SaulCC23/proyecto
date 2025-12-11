@@ -1,0 +1,220 @@
+/* ======================================================
+   BASIT BEAUTY SALON & SPA
+   Archivo: movil.css (RESPONSIVE 430px)
+   ------------------------------------------------------
+   REQ 2: Menú desplegable tipo sándwich (css + js + jQuery)
+   REQ 3: Diseño responsivo para iPhone 430px
+   REQ 4: Uso de @media queries
+   ====================================================== */
+
+@media (max-width: 430px) {
+
+    /* Ajuste general: todo en una sola columna */
+    body {
+        font-size: 0.9rem;
+    }
+
+    .contenedor {
+        width: 100%;
+        padding: 0 16px;
+    }
+
+    /* Barra superior: texto centrado y en columnas */
+    .fila-barra {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .info-barra span {
+        display: block;
+        margin-right: 0;
+    }
+
+    /* HEADER + MENÚ MÓVIL (REQ 2) */
+    .fila-nav {
+        padding: 10px 16px;
+    }
+
+    .nav-principal ul {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .nav-principal {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        width: 100%;
+        background: #ffffff;
+        border-top: 1px solid #e5e7eb;
+        display: none;           /* jQuery .slideToggle() lo muestra (REQ 2) */
+        z-index: 999;
+    }
+
+    .nav-principal li {
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    .nav-principal a {
+        display: block;
+        padding: 10px 16px;
+    }
+
+    .btn-menu {
+        display: block;          /* se muestra icono de hamburguesa (REQ 2) */
+        color: #111827;
+    }
+
+    /* HERO */
+    .hero-fondo img {
+        height: 420px;
+    }
+
+    .hero-contenido {
+        align-items: flex-end;
+        padding-bottom: 40px;
+    }
+
+    .hero-texto {
+        max-width: 100%;
+    }
+
+    .hero h1 {
+        font-size: 1.9rem;
+    }
+
+    .hero-botones {
+        flex-direction: column;
+    }
+
+    /* Barra de cita: se vuelve columna */
+    .barra-cita-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ABOUT: 1 columna */
+    .fila-about {
+        grid-template-columns: 1fr;
+    }
+
+    /* SERVICIOS: 1 tarjeta por fila */
+    .servicios-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .imagen-servicio {
+        height: 220px;
+    }
+
+    /* FEATURE: 2 por fila para no verse diminutos */
+    .grid-feature {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    /* PORTFOLIO: 2 por fila */
+    .grid-portfolio {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .item-portfolio img {
+        height: 180px;
+    }
+
+    /* CTA PARALLAX: un poco más pequeña en alto */
+    .seccion-cta {
+        height: 220px;
+        background-attachment: scroll; /* en mobile se desactiva el fixed por rendimiento */
+    }
+
+    /* SPECIALIST: 2 cards por fila */
+    .grid-especialistas {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .img-especialista {
+        height: 210px;
+    }
+
+    /* CLIENT REVIEW */
+    .cliente-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cliente-foto {
+        margin: 0 auto;
+    }
+
+    .btn-flecha.flecha-prev {
+        left: 4px;
+    }
+    .btn-flecha.flecha-next {
+        right: 4px;
+    }
+
+    /* PRICING: 1 plan por fila */
+    .grid-pricing {
+        grid-template-columns: 1fr;
+    }
+
+    /* LOGOS: se centran y se hace scroll horizontal suave si excede */
+    .fila-logos {
+        gap: 10px;
+        overflow-x: auto;
+    }
+
+    /* BLOG: 1 por fila */
+    .grid-blog {
+        grid-template-columns: 1fr;
+    }
+
+    /* CONSULT + FAQ: una columna */
+    .fila-consult-faq {
+        grid-template-columns: 1fr;
+    }
+
+    .form-consult .fila-form {
+        flex-direction: column;
+    }
+
+    /* NEWSLETTER */
+    .fila-newsletter {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .form-newsletter {
+        width: 100%;
+    }
+
+    /* CONTACTO */
+    .fila-contacto {
+        grid-template-columns: 1fr;
+    }
+
+    .col-contacto-mapa iframe {
+        height: 260px;
+    }
+
+    /* FOOTER */
+    .fila-footer {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .grid-insta {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Botón subir: un poco más pequeño */
+    .btn-subir {
+        right: 16px;
+        bottom: 16px;
+        width: 38px;
+        height: 38px;
+    }
+}

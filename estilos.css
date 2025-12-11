@@ -1,0 +1,1409 @@
+/* =========================================================
+   VARIABLES GENERALES (Colores, tipografía)
+   Requisito: uso consistente de paleta y tipografía
+   ========================================================= */
+
+:root {
+    --thm-font: 'Poppins', sans-serif;
+    --thm-base: #c2ad76;
+    --thm-color: #c6857d;     /* rosa principal */
+    --thm-bg: #c6857d;
+    --thm-black: #404040;
+    --thm-white: #ffffff;
+    --thm-eee: #eeeeee;
+    --thm-ddd: #dddddd;
+    --thm-f6: #f1f8ff;
+    --thm-f5: #f5f5f5;
+    --thm-f4: #f4f4f4;
+    --thm-f3: #f3f3f3;
+    --thm-f2: #f2f2f2;
+    --thm-f1: #f1f1f1;
+    --thm-fb: #f6f6f6;
+    --thm-p: #737373;
+    --thm-9: #999999;
+}
+
+/* =========================================================
+   RESET BÁSICO
+   Requisito: maquetado limpio y control de estilos
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--thm-font);
+    color: #212529;
+    background-color: #ffffff;
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Contenedor centrado a 1200px (Requisito: layout fijo 1200) */
+.contenedor {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   BARRA SUPERIOR
+   ========================================================= */
+
+.barra-superior {
+    background-color: #c6857d;
+    color: #fff;
+    font-size: 0.85rem;
+}
+
+.fila-barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.info-barra span {
+    margin-right: 20px;
+}
+
+.info-barra i {
+    margin-right: 6px;
+}
+
+/* =========================================================
+   HEADER + NAV (sticky)
+   Requisito: menú fijo al hacer scroll
+   ========================================================= */
+
+.header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.fila-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+}
+
+.logo img {
+    height: 40px;
+}
+
+/* Menú horizontal en escritorio */
+.nav-principal ul {
+    display: flex;
+    gap: 28px;
+    font-size: 0.95rem;
+}
+
+.nav-principal a {
+    position: relative;
+    font-weight: 500;
+    color: #111827;
+}
+
+/* Línea animada bajo el enlace (Requisito: hover con transición) */
+.nav-principal a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background-color: #c6857d;
+    transition: width 0.3s;
+}
+
+.nav-principal a:hover::after,
+.nav-principal a.activo::after {
+    width: 100%;
+}
+
+/* Botón hamburguesa se oculta en escritorio
+   (solo se usa en movil.css) */
+.btn-menu {
+    display: none;
+    border: none;
+    background: none;
+    font-size: 1.3rem;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    position: relative;
+    background-color: #c6857d;
+    color: #fff;
+    overflow: hidden;
+}
+
+/* Imagen grande de fondo */
+.hero-fondo img {
+    width: 100%;
+    height: 540px;
+    object-fit: cover;
+}
+
+/* Contenido encima de la imagen con posición absoluta */
+.hero-contenido {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+}
+
+.hero-texto {
+    max-width: 480px;
+}
+
+.hero-etiqueta {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 18px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero-etiqueta img {
+    width: 22px;
+    margin-right: 10px;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 18px;
+}
+
+.hero-descripcion {
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+}
+
+.hero-botones {
+    display: flex;
+    gap: 16px;
+}
+
+/* Botones generales reutilizables
+   (Requisito: estilo uniforme de botones) */
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.btn-blanco {
+    background-color: #fff;
+    color: #c6857d;
+}
+
+.btn-blanco:hover {
+    background-color: transparent;
+    color: #fff;
+    border-color: #fff;
+}
+
+.btn-rosa {
+    background-color: #c6857d;
+    color: #fff;
+    border-color: #c6857d;
+}
+
+.btn-rosa:hover {
+    background-color: #fff;
+    color: #c6857d;
+}
+
+/* =========================================================
+   BARRA DE CITA (FORMULARIO)
+   Requisito: formulario de reservación
+   ========================================================= */
+
+.barra-cita {
+    background-color: #343a40;
+    padding: 40px 0;
+    color: #fff;
+}
+
+.barra-cita-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px 26px;
+    align-items: flex-end;
+}
+
+.grupo-campo label {
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.grupo-campo input,
+.grupo-campo select {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 3px;
+    border: none;
+    font-size: 0.9rem;
+    color: #111827;
+}
+
+.campo-icono {
+    position: relative;
+}
+
+.campo-icono i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #c6857d;
+}
+
+.grupo-boton {
+    display: flex;
+    align-items: flex-end;
+}
+
+.grupo-boton button {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 1rem;
+}
+
+/* =========================================================
+   SECCIONES GENERALES
+   ========================================================= */
+
+.seccion {
+    padding: 70px 0;
+}
+
+.seccion-about {
+    background-color: #fff;
+}
+
+.seccion-servicios {
+    background-color: #f9fafb;
+}
+
+.encabezado-seccion {
+    margin-bottom: 40px;
+}
+
+.centrado {
+    text-align: center;
+}
+
+.texto-mini {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #c6857d;
+    margin-bottom: 8px;
+}
+
+.icono-separador img {
+    width: 24px;
+    margin: 0 auto 16px auto;
+}
+
+.texto-intro {
+    font-size: 0.95rem;
+    color: #6b7280;
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   ABOUT
+   Requisito: sección de bienvenida + botón video modal
+   ========================================================= */
+
+.fila-about {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    align-items: center;
+}
+
+.columna-about h2 {
+    font-size: 1.9rem;
+    margin-bottom: 18px;
+}
+
+.parrafo {
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin-bottom: 22px;
+}
+
+/* Contenedor de imagen del bloque About
+   (ahora es un slider con 3 imágenes) */
+.about-imagen {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+
+    /* alto proporcional (como 16:10 aprox.) */
+    padding-top: 65%;
+}
+
+/* Cada slide del slider */
+.about-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    opacity: 0;
+    transition: opacity .4s ease;
+}
+
+/* Slide visible */
+.about-slide.activo {
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Capa oscura encima de la foto */
+.about-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.18);
+    z-index: 2;
+}
+
+/* Botón de play centrado (ya lo tenías, sólo le subimos el z-index) */
+.btn-play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background-color: #c6857d;
+    color: #fff;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3; /* por encima del overlay */
+}
+
+/* Flechas del carrusel de About */
+.flecha-about {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+}
+
+.flecha-about--prev {
+    left: 14px;
+}
+
+.flecha-about--next {
+    right: 14px;
+}
+
+/* =========================================================
+   SERVICIOS (3 CARDS)
+   ========================================================= */
+
+.seccion-servicios {
+    padding: 80px 0;
+    background-color: #f9fafb;
+}
+
+.servicios-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+}
+
+.tarjeta-servicio {
+    background-color: #ffffff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Efecto hover con transform (Requisito: animación simple) */
+.tarjeta-servicio:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+.imagen-servicio {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.imagen-servicio img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.icono-servicio {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c6857d;
+    font-size: 1.3rem;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+}
+
+.contenido-servicio {
+    padding: 28px 30px 26px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.contenido-servicio h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: #111827;
+}
+
+.contenido-servicio p {
+    font-size: 0.95rem;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.lista-servicio {
+    margin: 18px 0 18px;
+    padding: 0;
+}
+
+.lista-servicio li {
+    font-size: 0.95rem;
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.lista-servicio i {
+    color: #c6857d;
+    font-size: 0.9rem;
+}
+
+.precio-servicio {
+    font-weight: 600;
+    color: #111827;
+    margin-top: 4px;
+    margin-bottom: 18px;
+}
+
+.btn-servicio {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 11px 32px;
+    border-radius: 4px;
+    background-color: #c6857d;
+    color: #ffffff;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-servicio:hover {
+    background-color: #b06a63;
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   HORARIO
+   ========================================================= */
+
+.seccion-horario {
+    background-color: #fff;
+}
+
+.lista-horario {
+    margin-top: 20px;
+}
+
+.lista-horario li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 10px 0;
+    font-size: 0.95rem;
+}
+
+/* =========================================================
+   FEATURE
+   ========================================================= */
+
+.seccion-feature {
+    background-color: #f9fafb;
+}
+
+.grid-feature {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.card-feature {
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 24px 20px 26px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.card-feature img {
+    width: 64px;
+    margin: 0 auto 18px;
+}
+
+.card-feature h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.card-feature p {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+/* =========================================================
+   PORTFOLIO + FANCYBOX
+   Requisito 22: LIGHTBOX (Fancybox) para las fotos
+   ========================================================= */
+
+.seccion-portfolio {
+    background-color: #fff;
+}
+
+.filtros-portfolio {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 26px;
+}
+
+/* Botones para filtrar (Requisito: interacción con DOM) */
+.btn-filtro {
+    font-size: 0.85rem;
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    cursor: pointer;
+    background-color: #f9fafb;
+}
+
+.btn-filtro.activo,
+.btn-filtro:hover {
+    background-color: #c6857d;
+    border-color: #c6857d;
+    color: #fff;
+}
+
+.grid-portfolio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.item-portfolio img {
+    height: 260px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.margen-top {
+    margin-top: 30px;
+}
+
+/* =========================================================
+   CTA PARALLAX
+   Requisito: sección con efecto PARALLAX
+   ========================================================= */
+
+/* El efecto parallax se logra con background-attachment: fixed
+   en la propia sección, usando la imagen de maquillaje. */
+.seccion-cta {
+    position: relative;
+    padding: 80px 0;
+    color: #fff;
+    text-align: center;
+    background-image: url('imagenes/imgi_33_4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;  /* <-- Efecto PARALLAX */
+}
+
+/* El div .cta-fondo ya no es necesario como imagen,
+   lo dejamos oculto solo por compatibilidad con el HTML. */
+.cta-fondo {
+    display: none;
+}
+
+.cta-contenido {
+    position: relative;
+    z-index: 1;
+}
+
+.cta-contenido h2 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+}
+
+/* =========================================================
+   SPECIALIST
+   ========================================================= */
+
+.seccion-specialist {
+    background-color: #fff;
+}
+
+.grid-especialistas {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+}
+
+.card-especialista {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    text-align: center;
+    padding-bottom: 25px;
+    transition: transform .25s ease;
+    overflow: hidden;
+}
+
+.card-especialista:hover {
+    transform: translateY(-8px);
+}
+
+.img-especialista {
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+}
+
+.img-especialista img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-especialista h3 {
+    margin-top: 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.card-especialista .cargo {
+    margin-top: 4px;
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.social-icons a {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c6857d;
+    transition: .2s;
+    font-size: 0.9rem;
+}
+
+.social-icons a:hover {
+    background: #c6857d;
+    color: #fff;
+}
+
+/* =========================================================
+   CLIENT REVIEW - SLIDER / CAROUSEL
+   Requisito: CARRUSEL con flechas y puntos
+   ========================================================= */
+
+.seccion-client {
+    background-color: #f9fafb;
+}
+
+/* Contenedor para poder posicionar flechas */
+.slider-clientes {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Cada testimonio actúa como "slide" */
+.item-testimonio {
+    display: none;
+}
+
+.item-testimonio.activo {
+    display: block;
+}
+
+.cliente-info {
+    display: flex;
+    gap: 26px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.cliente-foto {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.cliente-foto img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comilla {
+    position: absolute;
+    right: -10px;
+    bottom: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #c6857d;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cliente-texto p {
+    font-size: 0.95rem;
+    color: #4b5563;
+}
+
+.cliente-nombre {
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.cliente-nombre span {
+    font-weight: 400;
+    color: #9ca3af;
+}
+
+/* Puntos del slider (debajo del carrusel) */
+.puntos-slider {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.punto {
+    width: 30px;
+    height: 6px;
+    border-radius: 999px;
+    border: none;
+    background-color: #e5e7eb;
+    cursor: pointer;
+}
+
+.punto.activo {
+    background-color: #c6857d;
+}
+
+/* Flechas izquierda / derecha creadas desde JS
+   (Requisito: carrusel controlado con flechas) */
+.btn-slider {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(0,0,0,0.1);
+    color: #c6857d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color .2s ease;
+}
+
+.btn-slider:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+
+.btn-slider.prev {
+    left: -50px;
+}
+
+.btn-slider.next {
+    right: -50px;
+}
+
+/* =========================================================
+   PRICING
+   ========================================================= */
+
+.seccion-pricing {
+    background-color: #fff;
+}
+
+.grid-pricing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.card-pricing {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    padding: 28px 26px 30px;
+}
+
+.card-pricing img,
+.card-pricing h3 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.icono-pricing {
+    width: 56px;
+    margin-bottom: 16px;
+}
+
+.card-pricing h3 {
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.linea-precio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 12px 0;
+}
+
+.linea-precio h4 {
+    font-size: 0.95rem;
+}
+
+.linea-precio p {
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.linea-precio span {
+    font-weight: 600;
+    color: #c6857d;
+}
+
+.tachado {
+    text-decoration: line-through;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    margin-top: 6px;
+}
+
+.btn-full {
+    width: 100%;
+    margin-top: 16px;
+}
+
+/* =========================================================
+   LOGOS
+   ========================================================= */
+
+.seccion-logos {
+    background-color: #f9fafb;
+    padding: 40px 0;
+}
+
+.fila-logos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fila-logos img {
+    max-height: 70px;
+    object-fit: contain;
+}
+
+/* =========================================================
+   BLOG
+   ========================================================= */
+
+.seccion-blog {
+    background-color: #fff;
+}
+
+.grid-blog {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.card-blog {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+}
+
+.card-blog figure {
+    position: relative;
+}
+
+.card-blog figure img {
+    height: 230px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.blog-fecha {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    background-color: #c6857d;
+    color: #fff;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+}
+
+.blog-fecha span:first-child {
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+.card-blog h3 {
+    font-size: 1.1rem;
+    margin: 16px 20px 8px;
+}
+
+.card-blog p {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin: 0 20px 14px;
+}
+
+.enlace-blog {
+    display: inline-block;
+    margin: 0 20px 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #c6857d;
+}
+
+/* =========================================================
+   CONSULT + FAQ (Acordeón)
+   Requisito: componente ACORDEÓN con JS
+   ========================================================= */
+
+.seccion-consult-faq {
+    background-color: #f9fafb;
+}
+
+.fila-consult-faq {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.col-consult h2,
+.col-faq h2 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.col-consult p,
+.col-faq p {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 14px;
+}
+
+.form-consult .fila-form {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.form-consult input,
+.form-consult textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 4px;
+    border: 1px solid #e5e7eb;
+    font-size: 0.9rem;
+}
+
+.acordeon {
+    margin-top: 10px;
+}
+
+.item-acordeon {
+    border-radius: 4px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.titulo-acordeon {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: #f3f4ff;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.titulo-acordeon i {
+    margin-left: 12px;
+}
+
+.contenido-acordeon {
+    padding: 12px 16px 14px;
+    font-size: 0.9rem;
+    color: #6b7280;
+    display: none;
+}
+
+.item-acordeon.activo .contenido-acordeon {
+    display: block;
+}
+
+/* =========================================================
+   NEWSLETTER
+   ========================================================= */
+
+.seccion-newsletter {
+    background-color: #f3f4f6;
+    padding: 40px 0;
+}
+
+.fila-newsletter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fila-newsletter h2 {
+    font-size: 1.4rem;
+}
+
+.form-newsletter {
+    display: flex;
+    width: 420px;
+    border-radius: 999px;
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
+}
+
+.form-newsletter input {
+    border: none;
+    padding: 10px 14px;
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.form-newsletter button {
+    border: none;
+    background-color: #c6857d;
+    color: #fff;
+    width: 50px;
+    cursor: pointer;
+}
+
+/* =========================================================
+   CONTACTO
+   ========================================================= */
+
+.seccion-contacto {
+    background-color: #fff;
+}
+
+.fila-contacto {
+    display: grid;
+    grid-template-columns: 1.1fr 1.1fr;
+    gap: 36px;
+    align-items: center;
+}
+
+.col-contacto-info h2 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.col-contacto-info p {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 16px;
+}
+
+.item-contacto {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.icono-contacto {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #c6857d;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================================================
+   FOOTER + INSTAGRAM
+   ========================================================= */
+
+.footer {
+    background-color: #404040;
+    color: #ffffff;
+    padding-top: 60px;
+    margin-top: 40px;
+}
+
+.fila-footer {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1.4fr;
+    gap: 30px;
+    padding-bottom: 40px;
+    align-items: flex-start;
+    justify-items: flex-start;
+}
+
+/* Títulos con línea rosa */
+.footer h3 {
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+    color: #ffffff;
+    position: relative;
+    padding-bottom: 16px;
+}
+
+.footer h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 4px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #c6857d;
+}
+
+.footer h3::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    bottom: 6px;
+    width: 60px;
+    height: 2px;
+    background-color: #c6857d;
+}
+
+.footer p {
+    font-size: 0.9rem;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.footer h4 {
+    font-size: 0.95rem;
+    margin: 18px 0 10px;
+    color: #ffffff;
+}
+
+/* Redes footer */
+.redes-footer a {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    background-color: #c6857d;
+    color: #ffffff;
+    font-size: 0.9rem;
+}
+
+/* Lista enlaces */
+.lista-footer {
+    list-style: none;
+}
+
+.lista-footer li {
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 18px;
+}
+
+.lista-footer li::before {
+    content: "\203A";  /* caracter › */
+    position: absolute;
+    left: 0;
+    top: 1px;
+    font-size: 0.85rem;
+    color: #c6857d;
+}
+
+.lista-footer a {
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+/* Instagram 4x2 */
+.grid-insta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.grid-insta img {
+    width: 100%;
+    height: 70px;
+    object-fit: cover;
+}
+
+/* Copy final */
+.footer-bottom {
+    padding: 12px 0 18px;
+    text-align: center;
+    font-size: 0.85rem;
+    background-color: #262626;
+    color: #ffffff;
+}
+
+/* =========================================================
+   BOTÓN SUBIR ARRIBA
+   Requisito: botón que regrese al inicio
+   ========================================================= */
+
+.btn-subir {
+    position: fixed;
+    right: 26px;
+    bottom: 26px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background-color: #c6857d;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    display: none;      /* se muestra con JS al hacer scroll */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.3);
+}
+
